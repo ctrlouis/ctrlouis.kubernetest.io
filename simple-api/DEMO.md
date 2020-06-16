@@ -1,7 +1,11 @@
 # Demo
 
 ## Objectif
-Mise en place d'un deploiement, scaling d'application.
+
+- **Mise en place d'un deploiement**
+- **Scaling d'application**
+- **Mise à jour**
+- **Rollback**
 
 ***
 
