@@ -46,7 +46,3 @@ ou ab afin de valider le concept de provisionnement
 infrastructure distribuée à l'aide de Kubernetes.
 - Comprendre les mécanismes de routage et de répartion de charge à traver ces outils de
 dernière génération
-
-## Some urls
-
-- (Tuto nodejs/k8)[https://learnk8s.io/nodejs-kubernetes-guide]
