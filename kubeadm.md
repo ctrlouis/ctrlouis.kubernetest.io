@@ -65,7 +65,18 @@ kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
 
 1. Lancer la commande récuperer sur le noeud master lors de son initialisation.
 
-**
+2. Verifier la présence du nouveau noeud grâce a la commande 
+```
+kubectl get pods
+```
+
+> ***
+> Connaitre le noeud sur lequel est edployé un pod :
+> ```
+> kubectl get pods --output=wide
+> ```
+> ***
+***
 
 ## Sources :
 - [Installer Kubeadm (en)](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
