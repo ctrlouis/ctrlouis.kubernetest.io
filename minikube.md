@@ -35,4 +35,5 @@ Minikube Service <nom-du-service>
 
 ## Sources
 
-- [Installer Minikube](https://kubernetes.io/fr/docs/tasks/tools/install-minikube/)
+- [Installer Minikube (fr)](https://kubernetes.io/fr/docs/tasks/tools/install-minikube/)
+- [Installer Minikube (en)](https://kubernetes.io/docs/tasks/tools/install-minikube/)
