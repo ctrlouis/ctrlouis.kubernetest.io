@@ -2,6 +2,12 @@
 
 # Kubeadm
 
+## Prérequis
+
+- Docker
+
+***
+
 ## Installation
 1. Letting iptables see bridged traffic
 ```
@@ -26,7 +32,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 > ***
 > /!\ Kubelet ne fonctionne pas avec un espace swap actif
 > 1. `swapoff -a`
-> 1. Desactiver l'espace swap : `swapoff -v /swapfile` (lancez la commande en admin)
+> 1. Desactiver l'espace swap : `swapoff -v /swapfile` **(admin)**
 > 2. Supprimez la ligne *`/swapfile swap swap defaults 0 0`* du fichier *`/etc/fstab`*
 > ***
 
@@ -49,7 +55,7 @@ kubeadm join XX.XX.X.X:XXXX --token azert.dj64kglr89fhre \
     --discovery-token-ca-cert-hash sha256:650b0883499a31ce099c6ca8533d0h485ke8d15a1b18e1bcbdb0431337a8cd32a0915
 ```
 
-1. Configurer Kubeadm pour etre utiliser sans être admin (en admin) :
+1. Configurer Kubeadm pour etre utiliser sans être admin **(admin)** :
 ```
 kubeadm init
 ```
