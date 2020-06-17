@@ -55,7 +55,7 @@ kubeadm config images pull
 
 2. Initialiser le noeud maitre de Kubeadm **(admin)** :
 ```
-kubeadm init --pod-network-cidr 192.168.0.0/16
+kubeadm init --pod-network-cidr=192.168.0.0/16
 ```
 
 3. Déplacer les fichier de configuration de Kubernetes *(ligne de code fournit par la commande de l'étape 1)*:
@@ -111,7 +111,6 @@ rm ~/.kube/config
 > kubectl get pods --output=wide
 > ```
 > ***
-***
 
 > ***
 > Ajouter le parametre `-w` pour suivre les mise à jours en direct :
