@@ -29,10 +29,12 @@ sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
+
 > ***
 > /!\ Kubelet ne fonctionne pas avec un espace swap actif
-> 1. `swapoff -a`
-> 1. Desactiver l'espace swap : `swapoff -v /swapfile` **(admin)**
+> 1. Désactiver le swap : `swapoff -a`
+> OU
+> 1. Supprimer le volume swap : `swapoff -v /swapfile` **(admin)**
 > 2. Supprimez la ligne *`/swapfile swap swap defaults 0 0`* du fichier *`/etc/fstab`*
 > ***
 
@@ -44,23 +46,28 @@ kubeadm config images pull
 ***
 
 ## Configuration du noeud maitre
-1. Lancer Kubeadm (en admin) :
+
+1. Choisissez une add-on network [ici](https://kubernetes.io/fr/docs/setup/independent/create-cluster-kubeadm/#pod-network). (Exemple d'installation avec Calico)
+
+2. Initialiser le noeud maitre de Kubeadm **(admin)** :
 ```
-kubeadm init
+kubeadm init --pod-network-cidr 192.168.0.0/16
 ```
 
-2. Récuperer la ligne fournit a la fin de la commande `kubeadm init`. Elle permet de connecter les noeuds esclave, et ressemble a ceci :
+3. Déplacer les fichier de configuration de Kubernetes *(ligne de code fournit par la commande de l'étape 1)*:
+```
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+3. Récuperer la ligne fournit a la fin de la commande `kubeadm init`. Garder la pour plus tard, elle permet de connecter les noeuds esclave, et ressemble a ceci :
 ```
 kubeadm join XX.XX.X.X:XXXX --token azert.dj64kglr89fhre \
     --discovery-token-ca-cert-hash sha256:650b0883499a31ce099c6ca8533d0h485ke8d15a1b18e1bcbdb0431337a8cd32a0915
 ```
 
-1. Configurer Kubeadm pour etre utiliser sans être admin **(admin)** :
-```
-kubeadm init
-```
-
-4. Choisissez une add-on network [ici](https://kubernetes.io/fr/docs/setup/independent/create-cluster-kubeadm/#pod-network) et installez la. Exemple d'installation avec Calico
+4. Déployer l'add-on network choisi [ici](https://kubernetes.io/fr/docs/setup/independent/create-cluster-kubeadm/#pod-network) et installez la. (Exemple d'installation avec Calico)
 ```
 kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
 ```
