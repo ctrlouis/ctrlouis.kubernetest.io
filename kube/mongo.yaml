@@ -3,6 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: mongo-message
 spec:
+  sotrageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
