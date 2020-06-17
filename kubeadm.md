@@ -70,10 +70,38 @@ kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
 kubectl get pods
 ```
 
+***
+
+## Rénitialisation d'un noeud
+
+1. Réinitialisation du noeud **(admin)** :
+```
+kubeadm reset
+```
+
+2. Suppression du fichier de configuration (empêche d'obtenir des erreurs lors de la nouvelle configuration du noeud)
+```
+rm ~/.kube/config
+```
+
+***
+
+## Astuces
+
 > ***
 > Connaitre le noeud sur lequel est edployé un pod :
 > ```
 > kubectl get pods --output=wide
+> ```
+> ***
+***
+
+> ***
+> Ajouter le parametre `-w` pour suivre les mise à jours en direct :
+> ```
+> kubectl get nodes -w
+> kubectl get deployments -w
+> kubectl get pods -w
 > ```
 > ***
 ***
