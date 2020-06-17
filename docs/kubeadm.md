@@ -47,7 +47,11 @@ kubeadm config images pull
 
 ## Configuration du noeud maitre
 
-1. Choisissez une add-on network [ici](https://kubernetes.io/fr/docs/setup/independent/create-cluster-kubeadm/#pod-network). (Exemple d'installation avec Calico)
+> ***
+> Dans cette example de configuration, l'add-on réseau utilisé est Calico.
+> ***
+
+1. Choisissez une add-on réseau [ici](https://kubernetes.io/fr/docs/setup/independent/create-cluster-kubeadm/#pod-network). Prenez en compte la configuration nécessaire. Pour Calico, le prerequis est d'ajouter le paramètre `--pod-network-cidr 192.168.0.0/16` lors de la commande d'initialisation.
 
 2. Initialiser le noeud maitre de Kubeadm **(admin)** :
 ```
@@ -67,7 +71,7 @@ kubeadm join XX.XX.X.X:XXXX --token azert.dj64kglr89fhre \
     --discovery-token-ca-cert-hash sha256:650b0883499a31ce099c6ca8533d0h485ke8d15a1b18e1bcbdb0431337a8cd32a0915
 ```
 
-4. Déployer l'add-on network choisi [ici](https://kubernetes.io/fr/docs/setup/independent/create-cluster-kubeadm/#pod-network) et installez la. (Exemple d'installation avec Calico)
+1. Déployer l'add-on réseau choisi [ici](https://kubernetes.io/fr/docs/setup/independent/create-cluster-kubeadm/#pod-network) et installez la.
 ```
 kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
 ```
