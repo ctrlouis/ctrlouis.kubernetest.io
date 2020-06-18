@@ -58,23 +58,29 @@ kubeadm config images pull
 kubeadm init --pod-network-cidr=192.168.0.0/16
 ```
 
-3. Déplacer les fichier de configuration de Kubernetes *(ligne de code fournit par la commande de l'étape 1)*:
+3. Configurer kubectl *(aussi retourné par `kubeadm init`)*:
 ```
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-3. Récuperer la ligne fournit a la fin de la commande `kubeadm init`. Garder la pour plus tard, elle permet de connecter les noeuds esclave, et ressemble a ceci :
+4. Récuperer la ligne retourné par `kubeadm init`. Garder la pour initialiser les noeuds esclave. Elle ressemble a ceci :
 ```
 kubeadm join XX.XX.X.X:XXXX --token azert.dj64kglr89fhre \
     --discovery-token-ca-cert-hash sha256:650b0883499a31ce099c6ca8533d0h485ke8d15a1b18e1bcbdb0431337a8cd32a0915
 ```
 
-1. Déployer l'add-on réseau choisi [ici](https://kubernetes.io/fr/docs/setup/independent/create-cluster-kubeadm/#pod-network) et installez la.
+5. Déployer l'add-on réseau choisi [ici](https://kubernetes.io/fr/docs/setup/independent/create-cluster-kubeadm/#pod-network) et installez la.
 ```
-kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 ```
+
+6. Attendez que tout les pods aient été initialisés (status Running) avec la commande suivante :
+```
+watch kubectl get pods --all-namespaces
+```
+*(ctrl + c pour quitter)*
 
 ***
 
@@ -127,5 +133,6 @@ rm ~/.kube/config
 - [Création d'un cluster de contrôle unique (en)](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
 - [Création d'un cluster de haute disponibilité (en)](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/)
 - [Installation des addons net (en)](https://kubernetes.io/fr/docs/setup/independent/create-cluster-kubeadm/#pod-network)
+- [Démarrage rapide Calico (en)](https://docs.projectcalico.org/getting-started/kubernetes/quickstart)
 - [Supprimer l'espace swap (en)](https://linuxize.com/post/how-to-add-swap-space-on-ubuntu-18-04/)
 - [Comment créer un cluster Kubernetes en utilisant Kubeadm sur Ubuntu 18.04 (en)](https://www.digitalocean.com/community/tutorials/how-to-create-a-kubernetes-cluster-using-kubeadm-on-ubuntu-18-04)
