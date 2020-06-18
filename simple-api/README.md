@@ -15,12 +15,12 @@
 
 1. Création de l'image docker
 ```
-docker build -t simple-api:1.0 simple-api/
+docker build -t <username>/simple-api:1.0 simple-api/
 ```
 
 2. Upload de l'image docker
 ```
-docker push simple-api:1.0 simple-api/
+docker push <username>/simple-api:1.0 simple-api/
 ```
 
 3. Deploiement de l'application
@@ -57,17 +57,17 @@ kubectl get pods
 
 1. Mise à jour de l'image docker
 ```
-docker build -t simple-api:1.1 simple-api/
+docker build -t <username>/simple-api:1.1 simple-api/
 ```
 
 2. Upload de l'image docker mise à jour
 ```
-docker push simple-api:1.1 simple-api/
+docker push <username>/simple-api:1.1 simple-api/
 ```
 
 3. Mise à jour de l'image dans kubernetes
 ```
-kubectl set image deployments/simple-api app=simple-api:1.1
+kubectl set image deployments/simple-api app=<username>/simple-api:1.1
 
 ```
 
@@ -82,7 +82,7 @@ kubectl rollout status deployments/simple-api
 
 1. Mise à jour vers une image inexistante
 ```
-kubectl set image deployments/simple-api simple-api:1.2
+kubectl set image deployments/simple-api <username>/simple-api:1.2
 ```
 
 2. Rollback
