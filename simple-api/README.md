@@ -82,7 +82,7 @@ kubectl rollout status deployments/simple-api
 
 1. Mise à jour vers une image inexistante
 ```
-kubectl set image deployments/simple-api <username>/simple-api:1.2
+kubectl set image deployments/simple-api app=<username>/simple-api:1.2
 ```
 
 2. Rollback
