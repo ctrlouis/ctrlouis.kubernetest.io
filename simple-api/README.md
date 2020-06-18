@@ -20,7 +20,7 @@ docker build -t <username>/simple-api:1.0 simple-api/
 
 2. Upload de l'image docker
 ```
-docker push <username>/simple-api:1.0 simple-api/
+docker push <username>/simple-api:1.0
 ```
 
 3. Deploiement de l'application
