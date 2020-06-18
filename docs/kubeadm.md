@@ -82,6 +82,11 @@ watch kubectl get pods --all-namespaces
 ```
 *(ctrl + c pour quitter)*
 
+7. Supprimer la tainte
+```
+kubectl taint nodes --all node-role.kubernetes.io/master-
+```
+
 ***
 
 ## Configuration du noeud esclave
