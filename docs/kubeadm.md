@@ -128,3 +128,4 @@ rm ~/.kube/config
 - [Création d'un cluster de haute disponibilité (en)](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/)
 - [Installation des addons net (en)](https://kubernetes.io/fr/docs/setup/independent/create-cluster-kubeadm/#pod-network)
 - [Supprimer l'espace swap (en)](https://linuxize.com/post/how-to-add-swap-space-on-ubuntu-18-04/)
+- [Comment créer un cluster Kubernetes en utilisant Kubeadm sur Ubuntu 18.04 (en)](https://www.digitalocean.com/community/tutorials/how-to-create-a-kubernetes-cluster-using-kubeadm-on-ubuntu-18-04)
