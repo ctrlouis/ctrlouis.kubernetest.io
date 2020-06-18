@@ -2,17 +2,24 @@
 
 ## Kubectl
 
-### List resources :
+### Lister les ressources (nodes, deployments, pods, service,...):
 ```
 kubectl get <resources>
 ```
 
+### Supprimer un deploiement :
+```
+kubectl delete -f <deployments>
+```
+
 ## Minikube
-### Start minikube :
+
+### Démarrer Minikube :
 ```
 Minikube start
 ```
-### Get service url :
+
+### Obtenir l'url d'un service :
 ```
 Minikube service <service-name>
 ```
