@@ -19,6 +19,7 @@ import { fileURLToPath } from 'url';
 
 import indexRouter from './routes/index.js';
 import MessageRouter from './routes/messageRoute.js';
+import PodRouter from './routes/podRoute.js';
 
 const expressPort = 3000;
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -48,6 +49,7 @@ app.options('*', cors());
  */
 app.use('/', indexRouter);
 app.use('/messages', MessageRouter);
+app.use('/pods', PodRouter);
 
 app.listen(expressPort, () => {
     console.log("Server up and running at localhost: " + expressPort);
