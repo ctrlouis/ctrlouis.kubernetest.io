@@ -41,6 +41,11 @@ kubectl proxy
 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
 ```
 
+> ***
+> Avec minikube, la commande `minikube dashboard` démarre le serveur proxy
+> et ouvre l'url du tableau de bord dans votre navigateur par défaut
+> ***
+
 ### kubectl port-forward
 
 1. Executer le port-forward :
