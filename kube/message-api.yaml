@@ -15,7 +15,7 @@ kind: Deployment
 metadata:
   name: message-api
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: message-api
@@ -26,10 +26,30 @@ spec:
     spec:
       containers:
         - name: app
-          image: ctrlouis/message-api:1.1
+          image: ctrlouis/message-api:1.2
           ports:
             - containerPort: 3000
           env:
             - name: MONGO_URL
               value: mongodb://mongo:27017/dev
+            - name: MY_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: MY_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: MY_POD_SERVICE_ACCOUNT
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.serviceAccountName
           imagePullPolicy: Always
