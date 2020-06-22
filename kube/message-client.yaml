@@ -31,7 +31,7 @@ spec:
             - containerPort: 80
           env:
             - name: MESSAGE_API
-              value: message-api:8081
+              value: http://message-api:8081
             - name: MY_NODE_NAME
               valueFrom:
                 fieldRef:
