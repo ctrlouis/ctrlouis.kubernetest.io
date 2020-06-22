@@ -13,16 +13,16 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: message-api
+  name: message-client
 spec:
   replicas: 5
   selector:
     matchLabels:
-      app: message-api
+      app: message-client
   template:
     metadata:
       labels:
-        app: message-api
+        app: message-client
     spec:
       containers:
         - name: app
