@@ -1,10 +1,12 @@
 <template>
     <div id="app">
-      <Message
-          v-for="message in messages"
-          :key="message.id"
-          :message="message"
-      />
+      <div id="messages-list">
+        <Message
+            v-for="message in orderedMessages"
+            :key="message.id"
+            :message="message"
+        />
+      </div>
       <Form :message="message" @sendButtonClicked="sendMessage" />
     </div>
 </template>
@@ -24,6 +26,13 @@ export default {
           message: { author: '', username: ''}
       }
   },
+  computed: {
+      orderedMessages () {
+          return Array.from(this.messages).sort((a, b) => {
+              return a.date < b.date ? 1 : a.date > b.date ? -1 : 0
+          })
+      }
+  },
   methods: {
     async sendMessage () {
         const res = await axios.post(this.url, this.message)
@@ -40,6 +49,21 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+body {
+  margin: 0;
+}
+#app {
+  font-family: Arial, 'sans-serif';
+  display: grid;
+  grid-template-columns: 50% 50%;
+  height: 100vh;
+}
+#messages-list {
+  overflow-y: scroll;
+  padding: 15px;
+}
+#messages-list > .message {
+  margin: 15px 0;
+}
 </style>
