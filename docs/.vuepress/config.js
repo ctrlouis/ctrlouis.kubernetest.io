@@ -13,6 +13,13 @@ module.exports = {
                     { text: 'Minikube', link: '/tools/minikube' },
                     { text: 'Siege', link: '/tools/siege' },
                 ]
+            },
+            {
+                text: 'Tests',
+                items: [
+                    { text: 'Message app', link: '/tests/message'},
+                    { text: 'Simple API', link: '/tests/simple-api'}
+                ]
             }
         ],
         sidebar: 'auto',
