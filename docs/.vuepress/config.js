@@ -4,7 +4,16 @@ module.exports = {
     themeConfig: {
         nav: [
             { text: 'Accueil', link: '/'},
-            { text: 'Kubernetes', link: '/kubernetes'}
+            { text: 'Kubernetes', link: '/kubernetes'},
+            {
+                text: 'Tests',
+                items: [
+                    { text: 'Dashboard', link: '/dashboard' },
+                    { text: 'Kubeadm', link: '/kubeadm' },
+                    { text: 'Minikube', link: '/minikube' },
+                    { text: 'Siege', link: '/siege' },
+                ]
+            }
         ],
         sidebar: 'auto',
         smoothScroll: true
