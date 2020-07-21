@@ -6,12 +6,12 @@ module.exports = {
             { text: 'Accueil', link: '/'},
             { text: 'Kubernetes', link: '/kubernetes'},
             {
-                text: 'Tests',
+                text: 'Tools',
                 items: [
-                    { text: 'Dashboard', link: '/dashboard' },
-                    { text: 'Kubeadm', link: '/kubeadm' },
-                    { text: 'Minikube', link: '/minikube' },
-                    { text: 'Siege', link: '/siege' },
+                    { text: 'Dashboard', link: '/tools/dashboard' },
+                    { text: 'Kubeadm', link: '/tools/kubeadm' },
+                    { text: 'Minikube', link: '/tools/minikube' },
+                    { text: 'Siege', link: '/tools/siege' },
                 ]
             }
         ],
