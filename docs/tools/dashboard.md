@@ -1,3 +1,8 @@
+---
+title: Dashboard
+next: /tools/kubeadm
+---
+
 # Dashboard
 
 Le dashboard (*tableau de bord*) est une interface Web pour Kubernetes.

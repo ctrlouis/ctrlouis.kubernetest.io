@@ -6,7 +6,7 @@ module.exports = {
             { text: 'Accueil', link: '/'},
             { text: 'Kubernetes', link: '/kubernetes'},
             {
-                text: 'Tools',
+                text: 'Outils',
                 items: [
                     { text: 'Dashboard', link: '/tools/dashboard' },
                     { text: 'Kubeadm', link: '/tools/kubeadm' },

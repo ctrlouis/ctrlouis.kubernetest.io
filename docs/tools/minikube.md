@@ -1,3 +1,9 @@
+---
+title: Minikube
+prev: /tools/kubeadm
+next: /tools/siege
+---
+
 ![Logo Kubeadm](/assets/images/minikube.png)
 
 # Minikube

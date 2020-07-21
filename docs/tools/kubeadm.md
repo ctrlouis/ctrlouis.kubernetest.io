@@ -1,3 +1,9 @@
+---
+title: Kubeadm
+prev: /tools/dashboard
+next: /tools/minikube
+---
+
 ![Logo Kubeadm](/assets/images/kubeadm-small.png)
 
 # Kubeadm
