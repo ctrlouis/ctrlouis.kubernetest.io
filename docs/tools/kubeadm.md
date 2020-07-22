@@ -4,18 +4,24 @@ prev: /tools/dashboard
 next: /tools/minikube
 ---
 
-![Logo Kubeadm](/assets/images/kubeadm-small.png)
-
 # Kubeadm
+
+![Logo Kubeadm](../assets/images/kubeadm.png)
+
+**Kubeadm** est un outil certifié par Kubernetes, permettant de démarrer rapidement un **cluster** à master unique.
+
+Il effectue les actions nécessaires afin d'obtenir un cluster minimal mais fonctionnel et en état de marche.
 
 ## Prérequis
 
 - Docker
 
-***
-
 ## Installation
-1. Letting iptables see bridged traffic
+
+### iptables
+
+Laisser `iptables` observer le trafic : 
+
 ```
 cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
@@ -24,7 +30,10 @@ EOF
 sudo sysctl --system
 ```
 
-2. Install kubeadm, kubelet and kubectl :
+### Paquets
+
+Installer `kubeadm`, `kubelet` and `kubectlz` :
+
 ```
 sudo apt-get update && sudo apt-get install -y apt-transport-https curl
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
@@ -32,114 +41,134 @@ cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
 deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 sudo apt-get update
-sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-get install -y kubeadm kubelet kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
-> ***
-> /!\ Kubelet ne fonctionne pas avec un espace swap actif
-> 1. Désactiver le swap : `swapoff -a`
-> OU
-> 1. Supprimer le volume swap : `swapoff -v /swapfile` **(admin)**
-> 2. Supprimez la ligne *`/swapfile swap swap defaults 0 0`* du fichier *`/etc/fstab`*
-> ***
+::: danger Attention
+**Kubelet** ne fonctionne pas avec un espace swap actif :
+1. Désactiver le swap : `swapoff -a`
 
-3. Telecharger les fichiers de configuration de Kubeadm (en admin) :
+OU
+
+1. Supprimer le volume swap : `swapoff -v /swapfile` **(admin)**
+2. Supprimez la ligne `/swapfile swap swap defaults 0 0` dans le fichier `/etc/fstab`
+:::
+
+### Fichiers de configuration
+
+Telecharger les fichiers de configuration de Kubeadm (en admin) :
+
 ```
 kubeadm config images pull
 ```
 
 ***
 
-## Configuration du noeud maitre
+## Configuration
 
-> ***
-> Dans cette example de configuration, l'add-on réseau utilisé est Calico.
-> ***
+### Master node
 
-1. Choisissez une add-on réseau [ici](https://kubernetes.io/fr/docs/setup/independent/create-cluster-kubeadm/#pod-network). Prenez en compte la configuration nécessaire. Pour Calico, le prerequis est d'ajouter le paramètre `--pod-network-cidr 192.168.0.0/16` lors de la commande d'initialisation.
+#### 1. Add-on réseau 
 
-2. Initialiser le noeud maitre de Kubeadm **(admin)** :
+Choisissez un add-on [ici](https://kubernetes.io/fr/docs/setup/independent/create-cluster-kubeadm/#pod-network) et prenez en compte la configuration nécessaire.
+
+::: warning Note
+Dans cette exemple de configuration nous avons recours à Calico, voir cet [article](https://medium.com/flant-com/calico-for-kubernetes-networking-792b41e19d69) qui présente la combiniason de Calico/Kubernetes.
+::: 
+
+Pour Calico, il est nécessaire d'ajouter le paramètre `--pod-network-cidr 192.168.0.0/16` à la commande d'initialisation.
+
+#### 2. Initialisation
+
 ```
 kubeadm init --pod-network-cidr=192.168.0.0/16
 ```
 
-3. Configurer kubectl *(aussi retourné par `kubeadm init`)*:
+#### 3. Configuration kubectl
+
 ```
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-4. Récuperer la ligne retourné par `kubeadm init`. Garder la pour initialiser les noeuds esclave. Elle ressemble a ceci :
+#### 4. Récuperer la ligne retourné par `kubeadm init`
+
+Cette ligne permet d'initialiser les **worker nodes**, elle devrait ressembler à ceci :
+
 ```
 kubeadm join XX.XX.X.X:XXXX --token azert.dj64kglr89fhre \
     --discovery-token-ca-cert-hash sha256:650b0883499a31ce099c6ca8533d0h485ke8d15a1b18e1bcbdb0431337a8cd32a0915
 ```
 
-5. Déployer l'add-on réseau choisi [ici](https://kubernetes.io/fr/docs/setup/independent/create-cluster-kubeadm/#pod-network) et installez la.
+#### 5. Déployer l'add-on réseau
+
 ```
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 ```
 
-6. Attendez que tout les pods aient été initialisés (status Running) avec la commande suivante :
+#### 6. Initialisation des pods
+
+Attendez que touts les pods aient été initalisés grâce à la commande suivante :
+
 ```
 watch kubectl get pods --all-namespaces
 ```
-*(ctrl + c pour quitter)*
 
-7. Supprimer la tainte
+*(`ctrl + c` pour quitter)*
+
+#### 7. Supprimer la tainte
+
 ```
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
 
-***
+### Worker node
 
-## Configuration du noeud esclave
+#### 1. Initialisation
 
-1. Lancer la commande récuperer sur le noeud master lors de son initialisation.
+Lancer la commande renvoyée par l'initailsation du **master node** (voir étape 4. de la **configuration du master node**).
 
-2. Verifier la présence du nouveau noeud grâce a la commande 
+#### 2. Verifier la présence du nouveau noeud
+
 ```
 kubectl get pods
 ```
 
-***
+### Rénitialisation d'un noeud
 
-## Rénitialisation d'un noeud
+#### Réinitialisation
 
-1. Réinitialisation du noeud **(admin)** :
 ```
 kubeadm reset
 ```
 
-2. Suppression du fichier de configuration (empêche d'obtenir des erreurs lors de la nouvelle configuration du noeud)
+#### Suppression du fichier de configuration 
+
+Ceci empêche d'obtenir des erreurs lors de la nouvelle configuration du noeud :
+
 ```
 rm ~/.kube/config
 ```
 
-***
-
 ## Astuces
 
-> ***
-> Connaitre le noeud sur lequel est edployé un pod :
-> ```
-> kubectl get pods --output=wide
-> ```
-> ***
+Connaitre le noeud sur lequel est déployé un pod :
 
-> ***
-> Ajouter le parametre `-w` pour suivre les mise à jours en direct :
-> ```
-> kubectl get nodes -w
-> kubectl get deployments -w
-> kubectl get pods -w
-> ```
-> ***
-***
+```
+kubectl get pods --output=wide
+```
 
-## Sources :
+
+Ajouter le parametre `-w` pour suivre les mise à jours en direct :
+```
+kubectl get nodes -w
+kubectl get deployments -w
+kubectl get pods -w
+```
+
+## Sources
 - [Installer Kubeadm (en)](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
 - [Création d'un cluster de contrôle unique (en)](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
 - [Création d'un cluster de haute disponibilité (en)](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/)
