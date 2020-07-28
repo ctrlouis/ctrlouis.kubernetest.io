@@ -82,7 +82,7 @@ watch kubectl get pods --all-namespaces
 ```
 *(ctrl + c pour quitter)*
 
-7. Supprimer la tainte
+7. (facultatif) Supprimer la tainte du noeud maitre pour qu'il soit utilisé pour lancer des pods.
 ```
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```

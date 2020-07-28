@@ -25,12 +25,12 @@ sudo install minikube /usr/local/bin/
 
 - Démarrer Minikube :
 ```
-Minikube start
+minikube start
 ```
 
 - Obtenir l'url vers un service :
 ```
-Minikube Service <nom-du-service>
+minikube service <nom-du-service>
 ```
 
 ## Sources
