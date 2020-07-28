@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
+import store from './store/store'
 import Connection from './components/Connection.vue'
 import Message from './components/Message.vue'
 import NotFound from './components/NotFound.vue'
@@ -20,5 +21,6 @@ const router = new VueRouter({
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')

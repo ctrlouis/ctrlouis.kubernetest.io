@@ -21,7 +21,6 @@ export default {
   components: { ListMessage, Form },
   data () {
       return {
-          url: 'http://127.0.0.1:57250/messages',
           messages: [],
           message: { author: '', username: ''}
       }
@@ -31,11 +30,15 @@ export default {
           return Array.from(this.messages).sort((a, b) => {
               return a.date < b.date ? 1 : a.date > b.date ? -1 : 0
           })
+      },
+
+      apiUrl () {
+          return this.$store.state.apiUrl;
       }
   },
   methods: {
     async sendMessage () {
-        const res = await axios.post(this.url, this.message)
+        const res = await axios.post(`http://${this.apiUrl}/messages`, this.message)
         if (res.status >= 200 && res.status < 300) {
             this.messages.push(this.message)
             this.message = { username: '', text: '' }
@@ -43,7 +46,7 @@ export default {
     }
   },
   async mounted() {
-      const res = await axios.get(this.url)
+      const res = await axios.get(`http://${this.apiUrl}/messages`)
       this.messages = res.data
   }
 }
