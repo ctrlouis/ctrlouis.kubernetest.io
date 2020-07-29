@@ -3,7 +3,7 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import store from './store/store'
 import Connection from './components/Connection.vue'
-import Message from './components/Message.vue'
+import MainScreen from './components/MainScreen.vue'
 import NotFound from './components/NotFound.vue'
 
 Vue.config.productionTip = false
@@ -14,7 +14,7 @@ const router = new VueRouter({
   mode: 'history',
   routes: [
     {path: '/', component: Connection},
-    {path: '/message', component: Message},
+    {path: '/message', component: MainScreen},
     {path: '*', component: NotFound},
   ]
 });
