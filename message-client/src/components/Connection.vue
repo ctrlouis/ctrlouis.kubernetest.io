@@ -14,7 +14,7 @@ export default {
   name: 'Connection',
   data(){
     return{
-      url: ''
+      url: this.$store.state.apiUrl
     }
   },
   methods:{
