@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="sendButtonClicked">
-    <input id="ipt-username" type="text" v-model="message.username" placeholder="Your username">
+    <input id="ipt-username" type="text" v-model="message.username" size="12" placeholder="Your name">
     <input id="ipt-text" type="text" v-model="message.text" placeholder="Your message" required>
     <input type="submit" value="Send">
   </form>
@@ -45,9 +45,11 @@ label, input, textarea{
 
 input{
   padding: .6em;
+  min-width: 2em;
   &[type="submit"]{
     width: 60px;
     background-color: #00990077;
+    min-width: 60px;
     &:hover{
       cursor: pointer;
       background-color: #009900AA;

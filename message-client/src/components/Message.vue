@@ -52,7 +52,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 body {
   margin: 0;
 }
@@ -64,10 +64,13 @@ body {
 }
 #messages-list {
   overflow-y: scroll;
-  padding: 15px;
+  padding: 1em;
   box-shadow: inset 0px -6px 6px 0px rgba(0, 0, 0, .20);
-}
-#messages-list > .message {
-  margin: 15px 0;
+  display: flex;
+  flex-direction: column-reverse;
+
+  .message {
+    margin: .7em 0;
+  }
 }
 </style>
