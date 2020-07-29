@@ -40,9 +40,15 @@ export default {
     async sendMessage () {
         const res = await axios.post(`http://${this.apiUrl}/messages`, this.message)
         if (res.status >= 200 && res.status < 300) {
-            this.messages.push(this.message)
+            this.getMessages()
             this.message = { username: this.message.username, text: '' }
         }
+    },
+
+    getMessages () {
+        axios.get(`http://${this.apiUrl}/messages`).then((res) =>{
+            this.messages = res.data
+        })
     }
   },
   async mounted() {
