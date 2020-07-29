@@ -35,7 +35,6 @@ form {
   display: flex;
   flex-direction: row;
   padding: 1em;
-  flex-grow: 1;
   justify-content: center;
   border-top: 1px solid darkgray;
   .group {

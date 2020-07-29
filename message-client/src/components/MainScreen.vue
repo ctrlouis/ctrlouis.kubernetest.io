@@ -76,6 +76,7 @@ body {
 #messages-list {
   overflow-y: scroll;
   padding: 1em;
+  flex-grow: 1;
   box-shadow: inset 0px -6px 6px 0px rgba(0, 0, 0, .20);
   display: flex;
   flex-direction: column-reverse;
