@@ -22,7 +22,7 @@ export default {
   data () {
       return {
           messages: [],
-          message: { author: '', username: ''}
+          message: { username: '', text: ''}
       }
   },
   computed: {
@@ -41,7 +41,7 @@ export default {
         const res = await axios.post(`http://${this.apiUrl}/messages`, this.message)
         if (res.status >= 200 && res.status < 300) {
             this.messages.push(this.message)
-            this.message = { username: '', text: '' }
+            this.message = { username: this.message.username, text: '' }
         }
     }
   },

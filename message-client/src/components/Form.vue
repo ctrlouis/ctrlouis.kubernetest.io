@@ -5,7 +5,7 @@
       <textarea id="ipt-text" v-model="message.text" required></textarea>
     </div>
     <div class="group">
-      <label for="ipt-username">Usermane</label>
+      <label for="ipt-username">Username</label>
       <input id="ipt-username" type="text" v-model="message.username">
     </div>
     <input type="submit" value="Send">
