@@ -52,13 +52,14 @@ export default {
     }
   },
   async mounted() {
+    try {
       const res = await axios.get(`http://${this.apiUrl}/messages`)
-      if(res){
-        this.messages = res.data
+      this.messages = res.data
+    } catch (e) {
+      if(window.confirm("API not found ! Your API's URL must match with your service kubernetes url. Don't forget the PORT.")){
+        this.$router.push('/')
       }
-      else{
-        console.log('Marche pas')
-      }
+    }
   }
 }
 </script>
