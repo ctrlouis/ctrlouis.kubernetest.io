@@ -12,9 +12,12 @@ next: /tools/minikube
 
 Il effectue les actions nécessaires afin d'obtenir un cluster minimal mais fonctionnel et en état de marche.
 
+Comme pour [Minikube](/tools/minikube), **Kubeadm** est un bon moyen pour découvrir et essayer Kubernetes.
+
 ## Prérequis
 
 - Docker
+- Au moins 2 machines (physiques ou virtuelles) dôtées de Kubernetes
 
 ## Installation
 
@@ -69,7 +72,9 @@ kubeadm config images pull
 
 ### Master node
 
-#### 1. Add-on réseau 
+#### 1. Add-on réseau
+
+Un **add-on réseau** est nécessaire afin de **définir la manière dont les différents noeuds doivent communiquer entre eux**.
 
 Choisissez un add-on [ici](https://kubernetes.io/fr/docs/setup/independent/create-cluster-kubeadm/#pod-network) et prenez en compte la configuration nécessaire.
 
@@ -95,7 +100,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 #### 4. Récuperer la ligne retourné par `kubeadm init`
 
-Cette ligne permet d'initialiser les **worker nodes**, elle devrait ressembler à ceci :
+Cette ligne permettra aux **worker nodes** de rejoindre le cluster, elle devrait ressembler à ceci :
 
 ```
 kubeadm join XX.XX.X.X:XXXX --token azert.dj64kglr89fhre \
@@ -126,19 +131,23 @@ kubectl taint nodes --all node-role.kubernetes.io/master-
 
 ### Worker node
 
-#### 1. Initialisation
+#### 1. Rejoindre le cluster
 
-Lancer la commande renvoyée par l'initailsation du **master node** (voir étape 4. de la **configuration du master node**).
+Lancer la commande renvoyée par l'initailsation du **master node** (voir [Master node - étape 4.](/tools/kubeadm.html#master-node)).
 
 #### 2. Verifier la présence du nouveau noeud
 
+Depuis le **master node** :
+
 ```
-kubectl get pods
+kubectl get nodes
 ```
 
 ### Rénitialisation d'un noeud
 
 #### Réinitialisation
+
+Depuis le noeud à réinitialiser :
 
 ```
 kubeadm reset
