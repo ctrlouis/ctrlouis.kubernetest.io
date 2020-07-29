@@ -15,7 +15,13 @@ export default {
       user () { return this.message.username || 'anonym' },
       text () { return this.message.text },
       date () { return new Date(this.message.date).toLocaleString()},
-      isSent () { return (this.message.username == this.$store.state.username) ? true : false } //if message is sent by us, message class will change
+      isSent () {
+        let actualUsername = this.$store.state.username
+        if(this.message.username && this.message.username.toLowerCase() == actualUsername.toLowerCase())
+          return true
+        else
+          return false
+      }
   }
 }
 </script>
