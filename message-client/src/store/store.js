@@ -12,22 +12,22 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    setApiUrl(state, url) {
+    SET_API_URL(state, url) {
       state.apiUrl = url
     },
 
-    setUsername(state, username) {
+    SET_USERNAME(state, username) {
       state.username = username;
     },
   },
 
   actions: {
     setApiUrl(context, url) {
-      context.commit('setApiUrl', url)
+      context.commit('SET_API_URL', url)
     },
 
     setUsername(context, username) {
-      context.commit('setUsername', username)
+      context.commit('SET_USERNAME', username)
     },
   },
 
