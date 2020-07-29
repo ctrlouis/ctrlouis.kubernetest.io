@@ -68,7 +68,6 @@ docker push <username>/simple-api:1.1 simple-api/
 3. Mise à jour de l'image dans kubernetes
 ```
 kubectl set image deployments/simple-api app=<username>/simple-api:1.1
-
 ```
 
 4. Validation de la  mise à jour
