@@ -7,13 +7,18 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   props: {
-    message: { type: Object, default: () => { return { username: '', text: '' } } }
+    message: { type: Object, default: () => { return { username: this.$store.state.username, text: '' } } }
   },
   methods: {
+    ...mapActions(['setUsername']),
+
     sendButtonClicked (e) {
         e.preventDefault()
+        this.setUsername(this.message.username);
         this.$emit('sendButtonClicked', this.message)
     }
   }

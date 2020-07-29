@@ -22,7 +22,7 @@ export default {
   data () {
       return {
           messages: [],
-          message: { username: '', text: ''}
+          message: { username: this.$store.state.username, text: ''}
       }
   },
   computed: {
