@@ -123,7 +123,7 @@ watch kubectl get pods --all-namespaces
 
 *(`ctrl + c` pour quitter)*
 
-#### 7. Supprimer la tainte
+#### 7. Supprimer la tainte - *Facultatif*
 
 ```
 kubectl taint nodes --all node-role.kubernetes.io/master-
