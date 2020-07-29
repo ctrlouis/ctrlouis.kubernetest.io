@@ -58,13 +58,14 @@ body {
 }
 #app {
   font-family: Arial, 'sans-serif';
-  display: grid;
-  grid-template-columns: 50% 50%;
+  display: flex;
+  flex-direction: column;
   height: 100vh;
 }
 #messages-list {
   overflow-y: scroll;
   padding: 15px;
+  box-shadow: inset 0px -6px 6px 0px rgba(0, 0, 0, .20);
 }
 #messages-list > .message {
   margin: 15px 0;

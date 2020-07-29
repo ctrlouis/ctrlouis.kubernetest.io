@@ -1,13 +1,7 @@
 <template>
   <form @submit.prevent="sendButtonClicked">
-    <div class="group">
-      <label for="ipt-text">Message</label>
-      <textarea id="ipt-text" v-model="message.text" required></textarea>
-    </div>
-    <div class="group">
-      <label for="ipt-username">Username</label>
-      <input id="ipt-username" type="text" v-model="message.username">
-    </div>
+    <input id="ipt-username" type="text" v-model="message.username" placeholder="Your username">
+    <input id="ipt-text" type="text" v-model="message.text" placeholder="Your message" required>
     <input type="submit" value="Send">
   </form>
 </template>
@@ -26,40 +20,42 @@ export default {
 }
 </script>
 
-<style scoped>
-form {
-  align-self: center;
-}
-form, .group {
-  display: flex;
-  flex-direction: column;
-}
-.group {
-  width: 70%;
-  max-width: 400px;
-  margin: 10px auto;
-}
-label, input, textarea {
-  text-align: center;
-}
-input, textarea {
+<style lang="scss" scoped>
+@mixin input-style {
   border: solid 1px black;
   border-radius: 2px;
 }
-textarea {
-  resize: none;
-  height: 150px;
+
+form {
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+  flex-grow: 1;
+  justify-content: center;
+  border-top: 1px solid darkgray;
+  .group {
+    display: flex;
+    flex-direction: column;
+  }
 }
-input {
-  padding: 10px 0;
+
+label, input, textarea{
+  @include input-style;
 }
-input[type="submit"] {
-  width: 60px;
-  margin: auto;
-  background-color: #00990077;
+
+input{
+  padding: .6em;
+  &[type="submit"]{
+    width: 60px;
+    background-color: #00990077;
+    &:hover{
+      cursor: pointer;
+      background-color: #009900AA;
+    }
+  }
 }
-input[type="submit"]:hover {
-  cursor: pointer;
-  background-color: #009900AA;
+
+#ipt-text{
+  flex-grow: 1;
 }
 </style>
