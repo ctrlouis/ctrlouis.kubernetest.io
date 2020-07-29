@@ -6,7 +6,7 @@ next: /tools/minikube
 
 # Kubeadm
 
-![Logo Kubeadm](../assets/images/kubeadm.png)
+![logo-kubeadm](../assets/images/kubeadm.png)
 
 **Kubeadm** est un outil certifié par Kubernetes, permettant de démarrer rapidement un **cluster** à master unique.
 

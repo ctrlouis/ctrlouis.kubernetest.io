@@ -1,6 +1,6 @@
 # Kubernetes
 
-<img title="kubernetes-logo" src="./assets/images/kubernetes.png" alt="" data-align="center">
+![logo-kubernetes](./assets/images/kubernetes.png)
 
 Kubernetes (K8's) est un système **open-source** permettant **d'automatiser le déploiement, la mise à l'échelle et la gestion des applications conteneurisées**.
 
